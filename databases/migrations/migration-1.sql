@@ -1,0 +1,23 @@
+CREATE TABLE donasi (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    kode VARCHAR(100) NOT NULL,
+    sebagai VARCHAR(100) NOT NULL,
+    nama_lengkap VARCHAR(100) NOT NULL,
+    jenis_kelamin VARCHAR(100) NOT NULL,
+    tanggal_lahir VARCHAR(100) NOT NULL,
+    no_telepon VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    foto_ktp VARCHAR(100) NOT NULL,
+    NIK VARCHAR(100) NOT NULL,
+    NPWP VARCHAR(100) NOT NULL,
+    asal_perolehan_dana VARCHAR(100) NOT NULL,
+    provinsi VARCHAR(100) NOT NULL,
+    alamat VARCHAR(100) NOT NULL,
+    jumlah_donasi INT NOT NULL,
+    metode_pembayaran VARCHAR(100) NOT NULL,
+    `status` VARCHAR(100) NOT NULL,
+    payment_request JSON DEFAULT NULL,
+    payment_response JSON DEFAULT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME DEFAULT NULL
+);
