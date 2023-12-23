@@ -144,6 +144,20 @@
 
                             <div class="form-group">
                                 <label for="jumlah_donasi">Jumlah Donasi</label>
+                                <div class="input-group mb-2">
+                                    <div class="col-sm-3">
+                                        <button type="button" class="btn btn-outline-primary w-100" onclick="jumlah_donasi.value=20000">Rp. 20.000</button>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <button type="button" class="btn btn-outline-primary w-100" onclick="jumlah_donasi.value=50000">Rp. 50.000</button>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <button type="button" class="btn btn-outline-primary w-100" onclick="jumlah_donasi.value=100000">Rp. 100.000</button>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <button type="button" class="btn btn-outline-primary w-100" onclick="jumlah_donasi.value=200000">Rp. 200.000</button>
+                                    </div>
+                                </div>
                                 <input type="number" class="form-control" name="jumlah_donasi" id="jumlah_donasi">
                             </div>
 
