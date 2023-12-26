@@ -14,6 +14,11 @@ if(Request::isMethod('POST'))
     unset($data['_token']);
     unset($data['tos']);
 
+    if(isset($data['metadata']))
+    {
+        $data['metadata'] = json_encode($data['metadata']);
+    }
+
     $data['status'] = 'PENDING';
     $data['kode']   = strtotime('now') . '-' .rand(1000, 9999);
 

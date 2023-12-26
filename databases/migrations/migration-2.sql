@@ -1,0 +1,1 @@
+ALTER TABLE `donasi` ADD COLUMN `metadata` JSON DEFAULT NULL;
