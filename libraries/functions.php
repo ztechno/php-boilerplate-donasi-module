@@ -15,7 +15,15 @@ Terima kasih atas kontribusimu dalam mendukung Lurus Dalane. Berikut adalah rinc
 
 Jumlah Tagihan: Rp. *[Jumlah Tagihan]*
 Nomor Tagihan: *[Nomor Tagihan]*
-Metode : Transfer Rekening Mandiri *1710010428590* a.n *SONY PRASETYO*
+Metode : Transfer ke
+
+BANK MANDIRI - SENAYAN
+a.n. SONI FAHRURI
+no.rekening: 12200-310379-58
+
+BNI-KAMPUNG AMBON - Jakarta
+a.n. SONI FAHRURI
+No.rek.: 3103197953
 
 Lakukan konfirmasi dengan mereplay WA ini.
 
@@ -78,4 +86,65 @@ function sendWa($to, $message)
     } catch (\Throwable $th) {
         // throw $th;
     }
+}
+
+function hari_ini(){
+	$hari = date ("D");
+ 
+	switch($hari){
+		case 'Sun':
+			$hari_ini = "Minggu";
+		break;
+ 
+		case 'Mon':			
+			$hari_ini = "Senin";
+		break;
+ 
+		case 'Tue':
+			$hari_ini = "Selasa";
+		break;
+ 
+		case 'Wed':
+			$hari_ini = "Rabu";
+		break;
+ 
+		case 'Thu':
+			$hari_ini = "Kamis";
+		break;
+ 
+		case 'Fri':
+			$hari_ini = "Jumat";
+		break;
+ 
+		case 'Sat':
+			$hari_ini = "Sabtu";
+		break;
+		
+		default:
+			$hari_ini = "Tidak di ketahui";		
+		break;
+	}
+ 
+	return $hari_ini;
+ 
+}
+
+function tgl_indo($tanggal){
+	$bulan = array (
+		1 =>   'Januari',
+		'Februari',
+		'Maret',
+		'April',
+		'Mei',
+		'Juni',
+		'Juli',
+		'Agustus',
+		'September',
+		'Oktober',
+		'November',
+		'Desember'
+	);
+	$pecahkan = explode('-', $tanggal);
+	
+	return $pecahkan[2] . ' ' . $bulan[ (int)$pecahkan[1] ] . ' ' . $pecahkan[0];
 }

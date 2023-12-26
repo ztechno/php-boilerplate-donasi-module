@@ -31,10 +31,12 @@ if(Request::isMethod('POST'))
 
     sendNotifAfterSubmit($donasi);
 
-    set_flash_msg(['success'=>"Donasi berhasil disimpan"]);
+    set_flash_msg(['success'=>"Data telah terkirim. Cek WA untuk informasi pembayaran"]);
 
     header('location:'.routeTo('donasi/form'));
     die();
 }
 
-return view('donasi/views/form', compact('success_msg'));
+$day = hari_ini();
+$date = tgl_indo(date('Y-m-d'));
+return view('donasi/views/form', compact('success_msg','day', 'date'));

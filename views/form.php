@@ -40,9 +40,17 @@
         font-weight: bold;
       }
 
-      .btn-check:checked+.btn, .btn:hover {
+      .btn-check:checked+.btn, .btn:hover, .btn:active {
         background-color: #ffd701 !important;
         color: #FFF !important;
+      }
+      .canvas-container {
+        width: 300px;
+        margin: auto;
+      }
+      canvas {
+        width: 100%;
+        border-bottom: 1px solid #000;
       }
     </style>
   </head>
@@ -87,10 +95,24 @@
         </main>
     </div>
     <script src="https://getbootstrap.com/docs/5.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.1.7/dist/signature_pad.umd.min.js"></script>
     <script>
-    function enableSubmit(el, target = '#submit-btn')
+    function enableSubmit(el, target = '#submit-btn', modalTarget = false)
     {
+        if(el.checked && modalTarget)
+        {
+            const myModal = new bootstrap.Modal(document.querySelector(modalTarget), {})
+            myModal.show();
+        }
         document.querySelector(target).disabled = !el.checked
+    }
+
+    function showModal(el, target)
+    {
+        if(!el.checked) return false
+
+        const myModal = new bootstrap.Modal(document.querySelector(target), {})
+        myModal.show();
     }
 
     document.querySelectorAll('input[name="sebagai"]').forEach(el => {
@@ -98,6 +120,52 @@
             document.querySelectorAll('form').forEach(form => form.style.display = 'none')
             const formName = 'form_'+el.value.toLowerCase()
             document.querySelector('form[name="'+formName+'"]').style.display = 'block'
+        })
+    });
+
+    const canvas = document.querySelector("#canvas");
+    const canvas2 = document.querySelector("#canvas2");
+
+    const signaturePad = new SignaturePad(canvas);
+    const signaturePad2 = new SignaturePad(canvas2);
+
+    function saveSignature(target, form)
+    {
+        var signaturePadActive = null
+        if(target == '#sign-perusahaan')
+        {
+            signaturePadActive = signaturePad2
+        }
+        else
+        {
+            signaturePadActive = signaturePad
+        }
+        
+        if(signaturePadActive.isEmpty())
+        {
+            alert('Tanda tangan tidak boleh kosong')
+            return
+        }
+
+        document.querySelector(target).value = signaturePadActive.toDataURL()
+        form.submit()
+    }
+
+    function resetSignature(target)
+    {
+        if(target == '#sign-perusahaan')
+        {
+            signaturePad2.clear()
+        }
+        else
+        {
+            signaturePad.clear()
+        }
+    }
+
+    document.querySelectorAll('[data-watch]').forEach(el => {
+        el.addEventListener('change', evt => {
+            document.querySelector(el.dataset.watch).innerHTML = el.value
         })
     });
     </script>
