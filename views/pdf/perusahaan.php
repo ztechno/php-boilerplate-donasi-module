@@ -6,7 +6,7 @@
         <div><b>Nama Perusahaan/Badan Usaha : </b> <?=$data->nama_lengkap?></div>
         <div><b>Nomor Akta Pendirian Perusahaan : </b> <?=$data->NIK?></div>
         <div><b>NPWP Perusahaan : </b> <?=$data->NPWP?></div>
-        <div><b>No. Telepon Perusahaan : <?=$data->metadata->no_telepon?></div>
+        <div><b>No. Telepon Perusahaan : </b> <?=$data->metadata->no_telepon?> </div>
         <div><b>Email : </b> <?=$data->email?></div>
         <div><b>Keterangan Status : </b> <?=$data->metadata->keterangan_status?></div>
         <div><b>Asal Perolehan Dana : </b> <?=$data->asal_perolehan_dana?></div>
