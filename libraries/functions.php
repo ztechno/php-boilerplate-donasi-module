@@ -1,6 +1,7 @@
 <?php
 
 \Core\Request::addPublicRoute('donasi/form');
+\Core\Request::addPublicRoute('donasi/pdf');
 
 function getProvince()
 {
@@ -48,7 +49,9 @@ Jangan ragu untuk menghubungi kami jika ada pertanyaan lebih lanjut atau jika ka
 
 Salam hangat,
 
-_Tim Lurus Dalane_";
+_Tim Lurus Dalane_
+
+".routeTo('donasi/pdf', ['id' => $data->id]);
 
     $message = str_replace("[Nama]", $data->nama_lengkap, $message);
     $message = str_replace("[Jumlah Pembayaran]", number_format($data->jumlah_donasi), $message);
@@ -88,8 +91,8 @@ function sendWa($to, $message)
     }
 }
 
-function hari_ini(){
-	$hari = date ("D");
+function hari_ini($hari = false){
+	$hari = $hari ?? date ("D");
  
 	switch($hari){
 		case 'Sun':

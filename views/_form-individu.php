@@ -25,21 +25,22 @@
                     Dengan ini menyatakan bahwa:<br>
                     <ul>
                         <li>
-                            Kami tidak dalam keadaan menunggak pajak
+                            Penyumbang tidak menunggak pajak
                         </li>
                         <li>
-                            Kami tidak dinyatakan dalam keadaan penundaan kewajiban pembayaran utang atau dalam keadaan pailit berdasarkan putusan pengadilan yang telah memperoleh kekuatan hukum tetap
+                            Penyumbang tidak dinyatakan dalam keadaan penundaan kewajiban pembayaran utang atau dalam keadaan pailit berdasarkan putusan pengadilan yang telah memperoleh kekuatan hukum tetap
                         </li>
                         <li>
-                            Sumber dana tidak berasal dari tindak pidana yang telah terbukti berdasarkan putusan pengadilan yang telah memperoleh kekuatan hukum tetap dan/atau bertujuan menyembunyikan atau menyamarkan hasil tindak pidana dan
+                            Dana tidak berasal dari tindak pidana yang telah terbukti berdasarkan putusan pengadilan yang telah memperoleh kekuatan hukum tetap dan/atau bertujuan menyembunyikan atau menyamarkan hasil tindak pidana dan
                         </li>
                         <li>
                             Sumbangan bersifat tidak mengikat.
                         </li>
                     </ul>
-                    Selanjutnya, kami melampirkan salinan akta pendirian Perusahaan atau Badan Usaha.<br><br>
+                    
+                    Selanjutnya, saya lampirkan salinan KTP.<br><br>
 
-                    Demikian kami sampaikan semua informasi tersebut di atas dan kami buat dengan sebenar-benarnya agar dapat disampaikan kepada KPU.
+                    Demikian kami sampaikan semua informasi tersebut di atas dan saya buat dengan sebenar-benarnya agar dapat disampaikan kepada KPU.
                 </p>
                 <div class="canvas-container">
                     <canvas id="canvas"></canvas>

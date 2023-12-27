@@ -8,4 +8,6 @@ if($data->status == 'PENDING')
     $button .= '<a href="'.routeTo('donasi/resend', ['id' => $data->id]).'" class="btn btn-sm btn-primary" onclick="if(confirm(\'Apakah anda yakin mengirim ulang notifikasi ?\')){return true}else{return false}"><i class="fas fa-bell"></i> Resend</a> ';
 }
 
+$button .= '<a href="'.routeTo('donasi/pdf', ['id' => $data->id]).'" class="btn btn-sm btn-secondary" target="_blank">PDF</a> ';
+
 return $button;
