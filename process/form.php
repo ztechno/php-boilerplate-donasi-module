@@ -37,6 +37,6 @@ if(Request::isMethod('POST'))
     die();
 }
 
-$day = hari_ini();
+$day = hari_ini(date('D'));
 $date = tgl_indo(date('Y-m-d'));
 return view('donasi/views/form', compact('success_msg','day', 'date'));
