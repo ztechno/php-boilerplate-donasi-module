@@ -43,15 +43,17 @@ function sendNotifConfirm($data)
 
 Terima kasih atas konfirmasi pembayaranmu untuk tagihan donasi [Nomor Tagihan] sebesar Rp. *[Jumlah Pembayaran]*. Kami sangat menghargai dukungan dan kepercayaanmu.
 
-Semoga Allah membalas kebaikanmu dengan berlipat ganda.
+Sesuai Peraturan KPU no.18 Tahun 2023, berikut adalah surat pernyataan sebagai donatur (PDF):
 
-Jangan ragu untuk menghubungi kami jika ada pertanyaan lebih lanjut atau jika kamu membutuhkan informasi tambahan. Terus dukung kami dalam menyebarkan kebaikan.
+".routeTo('donasi/pdf', ['id' => $data->id])."
+
+Kami sangat menghargai dukungan dan kepercayaan Anda. Semoga Allah membalas kebaikan dengan berlipat ganda.
+
+Jangan ragu untuk menghubungi kami jika ada pertanyaan lebih lanjut atau jika membutuhkan informasi tambahan. Terus dukung kami dalam menyebarkan kebaikan.
 
 Salam hangat,
 
-_Tim Lurus Dalane_
-
-".routeTo('donasi/pdf', ['id' => $data->id]);
+_Tim Lurus Dalane_";
 
     $message = str_replace("[Nama]", $data->nama_lengkap, $message);
     $message = str_replace("[Jumlah Pembayaran]", number_format($data->jumlah_donasi), $message);

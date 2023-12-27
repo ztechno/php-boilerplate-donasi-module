@@ -124,10 +124,10 @@
             </div>
             
             <div class="form-group">
-                <label for="no_telepon_direksi" class="form-label">No. Telepon Direksi/Pimpinan</label>
+                <label for="no_telepon_direksi" class="form-label">No. WA Direksi/Pimpinan</label>
                 <div class="input-group mb-3">
                     <span class="input-group-text" id="basic-addon1">62</span>
-                    <input type="text" id="no_telepon_direksi" name="no_telepon" class="form-control" placeholder="No. Telepon Direksi/Pimpinan">
+                    <input type="text" id="no_telepon_direksi" name="no_telepon" class="form-control" placeholder="8xxxx">
                 </div>
             </div>
 
