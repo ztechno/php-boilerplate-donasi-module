@@ -33,7 +33,7 @@
     Demikian kami sampaikan semua informasi tersebut di atas dan saya buat dengan sebenar-benarnya agar dapat disampaikan kepada KPU.
 </p>
 <div class="canvas-container" style="text-align: center">
-    <?php if($data->metadata?->signature): ?>
+    <?php if(isset($data->metadata?->signature)): ?>
     <img src="<?=$data->metadata?->signature?>" alt=""><br>
     <?=$data->nama_lengkap?>
     <?php endif ?>
