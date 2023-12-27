@@ -41,10 +41,10 @@ return [
         //     'label' => 'NPWP',
         //     'type'  => 'text'
         // ],
-        'asal_perolehan_dana' => [
-            'label' => 'Asal Perolehan Dana',
-            'type'  => 'text'
-        ],
+        // 'asal_perolehan_dana' => [
+        //     'label' => 'Asal Perolehan Dana',
+        //     'type'  => 'text'
+        // ],
         'provinsi' => [
             'label' => 'Provinsi',
             'type'  => 'text'
