@@ -12,7 +12,7 @@ function sendNotifAfterSubmit($data)
 {
     $message = "Halo *[Nama]*,
 
-Terima kasih atas kontribusimu dalam mendukung Lurus Dalane. Berikut adalah rincian tagihan donasi yang harus dibayarkan:
+Terima kasih atas kontribusi anda dalam mendukung Lurus Dalane. Berikut adalah rincian tagihan donasi yang harus dibayarkan:
 
 Jumlah Tagihan: Rp. *[Jumlah Tagihan]*
 Nomor Tagihan: *[Nomor Tagihan]*
@@ -28,7 +28,7 @@ No.rek.: 3103197953
 
 Lakukan konfirmasi dengan mereplay WA ini.
 
-Terima kasih atas perhatian dan dukunganmu. Semoga Allah membalas kebaikanmu.";
+Terima kasih atas perhatian dan dukungan anda. Semoga Allah membalas kebaikanmu.";
 
     $message = str_replace("[Nama]", $data->nama_lengkap, $message);
     $message = str_replace("[Jumlah Tagihan]", number_format($data->jumlah_donasi), $message);
@@ -41,7 +41,7 @@ function sendNotifConfirm($data)
 {
     $message = "Halo *[Nama]*,
 
-Terima kasih atas konfirmasi pembayaranmu untuk tagihan donasi [Nomor Tagihan] sebesar Rp. *[Jumlah Pembayaran]*. Kami sangat menghargai dukungan dan kepercayaanmu.
+Terima kasih atas konfirmasi pembayaran anda untuk tagihan donasi [Nomor Tagihan] sebesar Rp. *[Jumlah Pembayaran]*. Kami sangat menghargai dukungan dan kepercayaan anda.
 
 Sesuai Peraturan KPU no.18 Tahun 2023, berikut adalah surat pernyataan sebagai donatur (PDF):
 
