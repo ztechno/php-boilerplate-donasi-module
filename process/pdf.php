@@ -16,7 +16,7 @@ $data->metadata = json_decode($data->metadata);
 $day = hari_ini(date('D', strtotime($data->created_at)));
 $date = tgl_indo(date('Y-m-d', strtotime($data->created_at)));
 
-$html = view('donasi/views/pdf/individu', compact('data', 'day', 'date'));
+$html = view('donasi/views/pdf/'.strtolower($data->sebagai), compact('data', 'day', 'date'));
 
 try {
     $html2pdf = new Html2Pdf('P', 'A4', 'fr');
