@@ -171,7 +171,7 @@ function createTransaction($donasi)
 		'merchant_ref'   => $donasi->kode,
 		'amount'         => $donasi->jumlah_donasi,
 		'customer_name'  => $donasi->nama_lengkap,
-		'customer_email' => $donasi->email ?? 'donatur-'.$donasi->id.'@lurusdalane.com',
+		'customer_email' => $donasi->email != '' ? $donasi->email : 'donatur-'.$donasi->id.'@lurusdalane.com',
 		'customer_phone' => $donasi->no_telepon,
 		'order_items'    => [
 			[
