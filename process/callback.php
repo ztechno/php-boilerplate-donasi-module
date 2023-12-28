@@ -9,7 +9,7 @@ $input  = file_get_contents('php://input');
 
 $response = $tripay->doCallback($input, function($data) use ($db){
     $reference = $data->reference;
-    $db->query = "SELECT * FROM donasi WHERE JSON_EXTRACT(payment_response, '$.reference')  = '$reference' AND `status` = 'PENDING'";
+    $db->query = "SELECT * FROM donasi WHERE JSON_EXTRACT(payment_response, '$.data.reference')  = '$reference' AND `status` = 'PENDING'";
     $donasi    = $db->exec('single');
     if($donasi)
     {
