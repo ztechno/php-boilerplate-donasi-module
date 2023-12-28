@@ -23,7 +23,7 @@ BNI-KAMPUNG AMBON - Jakarta
 a.n. SONI FAHRURI
 No.rek.: 3103197953" : ($data->metode_pembayaran != 'Cash' && $paymentResponse->success ? "Metode : $data->metode_pembayaran
 
-Klik <a href='".$paymentResponse->data->checkout_url."'>disini</a> untuk melakukan pembayaran
+Klik ".$paymentResponse->data->checkout_url." untuk melakukan pembayaran
 " : "");
 
     $message = "Halo *[Nama]*,
