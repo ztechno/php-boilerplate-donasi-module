@@ -40,7 +40,7 @@ if(Request::isMethod('POST'))
 
             if($transaction['response']->success)
             {
-                $message .= "atau klik <a href='".$transaction['response']->data->checkout_url."'>link</a> berikut untuk melakukan pembayaran";
+                $message .= " atau klik <a href='".$transaction['response']->data->checkout_url."'>link</a> berikut untuk melakukan pembayaran";
             }
     
             $donasi = $db->update('donasi', [
