@@ -4,6 +4,7 @@ use Modules\Donasi\Libraries\TriPay;
 
 \Core\Request::addPublicRoute('donasi/form');
 \Core\Request::addPublicRoute('donasi/pdf');
+\Core\Request::addPublicRoute('donasi/callback');
 
 function getProvince()
 {
