@@ -195,8 +195,8 @@
             <div class="form-group">
                 <label for="metode_pembayaran" class="form-label">Metode Pembayaran</label>
                 <select class="form-select" id="metode_pembayaran" name="metode_pembayaran" required>
-                    <option>Transfer</option>
-                    <option>Cash</option>
+                    <!-- <option>Transfer</option>
+                    <option>Cash</option> -->
                     <?php foreach($channel->data as $paymentMethod): ?>
                     <option value="<?=$paymentMethod->code?>">(<?=$paymentMethod->group?>) <?=$paymentMethod->name?></option>
                     <?php endforeach ?>
