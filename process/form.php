@@ -3,6 +3,7 @@
 use Core\Database;
 use Core\Request;
 use Core\Storage;
+use Modules\Donasi\Libraries\TriPay;
 
 $success_msg = get_flash_msg('success');
 
@@ -29,9 +30,33 @@ if(Request::isMethod('POST'))
     $db = new Database;
     $donasi = $db->insert('donasi', $data);
 
+    $message = "Data telah terkirim. Cek WA untuk informasi pembayaran";
+
+    if(!in_array($donasi->metode_pembayaran, ['Transfer','Cash']))
+    {
+        try {
+            //code...
+            $transaction = createTransaction($donasi);
+
+            if($transaction['response']->success)
+            {
+                $message .= "atau klik <a href='".$transaction['response']->data->checkout_url."'>link</a> berikut untuk melakukan pembayaran";
+            }
+    
+            $donasi = $db->update('donasi', [
+                'payment_request' => json_encode($transaction['payload']),
+                'payment_response' => json_encode($transaction['response'])
+            ],[
+                'id' => $donasi->id
+            ]);
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
+    }
+
     sendNotifAfterSubmit($donasi);
 
-    set_flash_msg(['success'=>"Data telah terkirim. Cek WA untuk informasi pembayaran"]);
+    set_flash_msg(['success'=> $message]);
 
     header('location:'.routeTo('donasi/form'));
     die();
@@ -39,4 +64,7 @@ if(Request::isMethod('POST'))
 
 $day = hari_ini(date('D'));
 $date = tgl_indo(date('Y-m-d'));
-return view('donasi/views/form', compact('success_msg','day', 'date'));
+$tripay = new TriPay;
+$channel = $tripay->getChannel();
+
+return view('donasi/views/form', compact('success_msg','day', 'date','channel'));

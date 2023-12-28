@@ -1,5 +1,7 @@
 <?php
 
+use Modules\Donasi\Libraries\TriPay;
+
 \Core\Request::addPublicRoute('donasi/form');
 \Core\Request::addPublicRoute('donasi/pdf');
 
@@ -10,13 +12,8 @@ function getProvince()
 
 function sendNotifAfterSubmit($data)
 {
-    $message = "Halo *[Nama]*,
-
-Terima kasih atas kontribusi anda dalam mendukung Lurus Dalane. Berikut adalah rincian tagihan donasi yang harus dibayarkan:
-
-Jumlah Tagihan: Rp. *[Jumlah Tagihan]*
-Nomor Tagihan: *[Nomor Tagihan]*
-Metode : Transfer ke
+	$paymentResponse = json_decode($data->payment_response);
+	$paymentMethod = $data->metode_pembayaran == 'Transfer' ? "Metode : Transfer ke
 
 BANK MANDIRI - SENAYAN
 a.n. SONI FAHRURI
@@ -24,7 +21,19 @@ no.rekening: 12200-310379-58
 
 BNI-KAMPUNG AMBON - Jakarta
 a.n. SONI FAHRURI
-No.rek.: 3103197953
+No.rek.: 3103197953" : ($data->metode_pembayaran != 'Cash' && $paymentResponse->success ? "Metode : $data->metode_pembayaran
+
+Klik <a href='".$paymentResponse->data->checkout_url."'>disini</a> untuk melakukan pembayaran
+" : "");
+
+    $message = "Halo *[Nama]*,
+
+Terima kasih atas kontribusi anda dalam mendukung Lurus Dalane. Berikut adalah rincian tagihan donasi yang harus dibayarkan:
+
+Jumlah Tagihan: Rp. *[Jumlah Tagihan]*
+Nomor Tagihan: *[Nomor Tagihan]*
+
+$paymentMethod
 
 Lakukan konfirmasi dengan mereplay WA ini.
 
@@ -152,4 +161,33 @@ function tgl_indo($tanggal){
 	$pecahkan = explode('-', $tanggal);
 	
 	return $pecahkan[2] . ' ' . $bulan[ (int)$pecahkan[1] ] . ' ' . $pecahkan[0];
+}
+
+function createTransaction($donasi)
+{
+	$payload = [
+		'method'         => $donasi->metode_pembayaran,
+		'merchant_ref'   => $donasi->kode,
+		'amount'         => $donasi->jumlah_donasi,
+		'customer_name'  => $donasi->nama_lengkap,
+		'customer_email' => $donasi->email ?? 'donatur-'.$donasi->id.'@lurusdalane.com',
+		'customer_phone' => $donasi->no_telepon,
+		'order_items'    => [
+			[
+				'sku'         => 'DONASI-'.$donasi->sebagai,
+				'name'        => 'DONASI '.$donasi->sebagai,
+				'price'       => $donasi->jumlah_donasi,
+				'quantity'    => 1,
+				'product_url' => routeTo('donasi/form'),
+				'image_url'   => url() . '/assets/ppdb/images/logo-lpis-alazhar.png',
+			],
+		],
+		'return_url'   => routeTo('donasi/form'),
+		'expired_time' => (time() + (24 * 60 * 60)), // 24 jam
+	];
+
+	$tripay = new TriPay;
+	$response = $tripay->createTransaction($payload);
+
+	return ['payload' => $payload, 'response' => $response];
 }
