@@ -47,7 +47,7 @@
                     <p class="text-center">Tanda Tangan Disini</p>
                 </div>
                 <div class="text-center">
-                    <button class="btn btn-warning" onclick="saveSignature('#sign-individu', form_individu)">SETUJU</button>
+                    <button class="btn btn-warning" onclick="saveSignature('#sign-individu', '#submit-individu')">SETUJU</button>
                     <button class="btn btn-danger" onclick="resetSignature('#sign-individu')">RESET TANDA TANGAN</button>
                 </div>
             </div>
@@ -180,5 +180,6 @@
             Dengan ini, saya setuju untuk memenuhi aturan donasi yang berlaku
         </label>
         <input type="hidden" name="metadata[signature]" id="sign-individu">
+        <button id="submit-individu" style="opacity: 0;">Submit</button>
     </div>
 </form>

@@ -129,7 +129,7 @@
     const signaturePad = new SignaturePad(canvas);
     const signaturePad2 = new SignaturePad(canvas2);
 
-    function saveSignature(target, form)
+    function saveSignature(target, submitBtnTarget)
     {
         var signaturePadActive = null
         if(target == '#sign-perusahaan')
@@ -148,7 +148,7 @@
         }
 
         document.querySelector(target).value = signaturePadActive.toDataURL()
-        form.submit()
+        document.querySelector(submitBtnTarget).click()
     }
 
     function resetSignature(target)

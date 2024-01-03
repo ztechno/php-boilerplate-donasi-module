@@ -46,7 +46,7 @@
                     
                 </div>
                 <div class="text-center">
-                    <button class="btn btn-warning" onclick="saveSignature('#sign-perusahaan', form_perusahaan)">SETUJU</button>
+                    <button class="btn btn-warning" onclick="saveSignature('#sign-perusahaan', '#submit-perusahaan')">SETUJU</button>
                     <button class="btn btn-danger" onclick="resetSignature('#sign-perusahaan')">RESET TANDA TANGAN</button>
                 </div>
             </div>
@@ -211,5 +211,6 @@
             Dengan ini, saya setuju untuk memenuhi aturan donasi yang berlaku
         </label>
         <input type="hidden" name="metadata[signature]" id="sign-perusahaan">
+        <button id="submit-perusahaan" style="opacity: 0;">Submit</button>
     </div>
 </form>
