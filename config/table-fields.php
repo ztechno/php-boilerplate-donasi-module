@@ -5,10 +5,14 @@ return [
             'label' => 'Kode',
             'type'  => 'text'
         ],
-        'sebagai' => [
-            'label' => 'Sebagai',
+        'created_at' => [
+            'label' => 'Waktu',
             'type'  => 'text'
         ],
+        // 'sebagai' => [
+        //     'label' => 'Sebagai',
+        //     'type'  => 'text'
+        // ],
         'nama_lengkap' => [
             'label' => 'Nama Lengkap',
             'type'  => 'text'
