@@ -20,39 +20,45 @@ class Ipaymu
 
     public function getPaymentMethod()
     {
-        $body = [
-            'account' => $this->va
+        return [
+            [
+                'name' => 'Virtual Account',
+                'code' => 'va',
+                'items' => [
+                    'BAG' => 'bag',
+                    'BCA' => 'bca',
+                    'BNI' => 'bni',
+                    'Cimb Niaga' => 'cimb',
+                    'Mandiri' => 'mandiri',
+                    'Muamalat' => 'bmi',
+                    'BRI' => 'bri',
+                    'BSI' => 'bsi',
+                    'Permata' => 'permata',
+                ]
+            ],
+            [
+                'name' => 'Bank Transfer',
+                'code' => 'banktransfer',
+                'items' => [
+                    'BCA' => 'bca',
+                ]
+            ],
+            [
+                'name' => 'Convenience Store',
+                'code' => 'cstore',
+                'items' => [
+                    'Alfamart' => 'alfamart',
+                    'Indomaret' => 'indomaret',
+                ]
+            ],
+            [
+                'name' => 'QRIS',
+                'code' => 'qris',
+                'items' => [
+                    'QRIS' => 'qris'
+                ]
+            ]
         ];
-        $timestamp = Date('YmdHis');
-        $signature = $this->createSignature($body, 'GET');
-        $ch = curl_init($this->apiUrl . 'payment-method-list');
-
-        $headers = array(
-            'Accept: application/json',
-            'Content-Type: application/json',
-            'va: ' . $this->va,
-            'signature: ' . $signature,
-            'timestamp: ' . $timestamp
-        );
-
-        curl_setopt($ch, CURLOPT_HEADER, false);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
-        $err = curl_error($ch);
-        $ret = curl_exec($ch);
-        curl_close($ch);
-
-        if($err) {
-            echo $err;
-            die();
-        } else {
-
-            //Response
-            return json_decode($ret);
-        }
     }
 
     /**
@@ -87,6 +93,51 @@ class Ipaymu
 
         curl_setopt($ch, CURLOPT_POST, count($body));
         curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonBody);
+
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+        $err = curl_error($ch);
+        $ret = curl_exec($ch);
+        curl_close($ch);
+
+        if($err) {
+            echo $err;
+            die();
+        } else {
+
+            //Response
+            return json_decode($ret);
+            // if($ret->Status == 200) {
+            //     $sessionId  = $ret->Data->SessionID;
+            //     $url        = $ret->Data->Url;
+            //     // header('Location:' . $url);
+            // } else {
+            //     return json_decode($ret);
+            // }
+            //End Response
+        }
+    }
+
+    public function getPaymentMethodList()
+    {
+        $body = [
+            'account' => $this->va
+        ];
+        $timestamp = Date('YmdHis');
+        $signature = $this->createSignature($body, 'GET');
+        $ch = curl_init($this->apiUrl . 'payment-method-list');
+
+        $headers = array(
+            'Accept: application/json',
+            'Content-Type: application/json',
+            'va: ' . $this->va,
+            'signature: ' . $signature,
+            'timestamp: ' . $timestamp
+        );
+
+        curl_setopt($ch, CURLOPT_HEADER, false);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
