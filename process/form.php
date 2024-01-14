@@ -68,6 +68,4 @@ $date = tgl_indo(date('Y-m-d'));
 $ipaymu = new Ipaymu;
 $channel = $ipaymu->getPaymentMethod();
 
-echo json_encode($channel); die;
-
 return view('donasi/views/form', compact('success_msg','day', 'date','channel'));
