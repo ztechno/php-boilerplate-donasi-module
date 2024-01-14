@@ -1,0 +1,1 @@
+ALTER TABLE `donasi` ADD COLUMN `payment_channel` VARCHAR(100) NULL ;

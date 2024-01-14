@@ -3,6 +3,7 @@
 use Core\Database;
 use Core\Request;
 use Core\Storage;
+use Modules\Donasi\Libraries\Ipaymu;
 use Modules\Donasi\Libraries\TriPay;
 
 $success_msg = get_flash_msg('success');
@@ -38,10 +39,10 @@ if(Request::isMethod('POST'))
             //code...
             $transaction = createTransaction($donasi);
 
-            if($transaction['response']->success)
-            {
-                $message .= " atau klik <a href='".$transaction['response']->data->checkout_url."'>link</a> berikut untuk melakukan pembayaran";
-            }
+            // if($transaction['response']->Message == 'success')
+            // {
+                // $message .= " atau klik <a href='".$transaction['response']->Data->Url."'>link</a> berikut untuk melakukan pembayaran";
+            // }
     
             $donasi = $db->update('donasi', [
                 'payment_request' => json_encode($transaction['payload']),
@@ -64,7 +65,9 @@ if(Request::isMethod('POST'))
 
 $day = hari_ini(date('D'));
 $date = tgl_indo(date('Y-m-d'));
-$tripay = new TriPay;
-$channel = $tripay->getChannel();
+$ipaymu = new Ipaymu;
+$channel = $ipaymu->getPaymentMethod();
+
+echo json_encode($channel); die;
 
 return view('donasi/views/form', compact('success_msg','day', 'date','channel'));

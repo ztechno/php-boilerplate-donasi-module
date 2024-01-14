@@ -1,10 +1,12 @@
 <?php
 
+use Modules\Donasi\Libraries\Ipaymu;
 use Modules\Donasi\Libraries\TriPay;
 
 \Core\Request::addPublicRoute('donasi/form');
 \Core\Request::addPublicRoute('donasi/pdf');
 \Core\Request::addPublicRoute('donasi/callback');
+\Core\Request::addPublicRoute('donasi/notify');
 
 function getProvince()
 {
@@ -22,9 +24,11 @@ no.rekening: 12200-310379-58
 
 BNI-KAMPUNG AMBON - Jakarta
 a.n. SONI FAHRURI
-No.rek.: 3103197953" : ($data->metode_pembayaran != 'Cash' && $paymentResponse->success ? "Metode : $data->metode_pembayaran
+No.rek.: 3103197953" : ($data->metode_pembayaran != 'Cash' && $paymentResponse->Status == 200 ? "Metode : $data->metode_pembayaran
 
-Klik ".$paymentResponse->data->checkout_url." untuk melakukan pembayaran
+Channel : $data->payment_channel
+No. Pembayaran : ".$data->paymentResponse->Data->PaymentNo."
+Nama Pembayaran : ".$data->paymentResponse->Data->PaymentName."
 " : "");
 
     $message = "Halo *[Nama]*,
@@ -165,6 +169,52 @@ function tgl_indo($tanggal){
 }
 
 function createTransaction($donasi)
+{
+	if(strtolower(env('PAYMENT_GATEWAY')) == 'tripay')
+	{
+		return tripayTransaction($donasi);
+	}
+
+	if(strtolower(env('PAYMENT_GATEWAY')) == 'ipaymu')
+	{
+		return ipaymuTransaction($donasi);
+	}
+}
+
+function ipaymuTransaction($donasi)
+{
+	$ipaymu = new Ipaymu;
+	// $body   = [];
+	// $body['product']    = array('DONASI '.$donasi->sebagai);
+    // $body['qty']        = array('1');
+    // $body['price']      = array($donasi->jumlah_donasi);
+    // $body['returnUrl']  = routeTo('donasi/thankyou');
+    // $body['cancelUrl']  = routeTo('donasi/cancel');
+    // $body['notifyUrl']  = routeTo('donasi/notify');
+    // $body['referenceId'] = $donasi->kode; //your reference id
+	$body = [
+		'name' => $donasi->nama_lengkap,
+		'phone' => $donasi->no_telepon,
+		'email' => $donasi->email != '' ? $donasi->email : 'donatur-'.$donasi->id.'@lurusdalane.com',
+		'amount' => $donasi->jumlah_donasi,
+		'notifyUrl' => routeTo('donasi/notify'),
+		'paymentMethod' => $donasi->metode_pembayaran,
+		'paymentChannel' => $donasi->payment_channel,
+		'referenceId' => $donasi->kode,
+		'product' => [
+			'DONASI '.$donasi->sebagai
+		],
+		'qty' => [1],
+		'price' => [
+			$donasi->jumlah_donasi
+		],
+	];
+	
+	$response = $ipaymu->createTransaction($body);
+	return ['payload' => $body, 'response' => $response];
+}
+
+function tripayTransaction($donasi)
 {
 	$payload = [
 		'method'         => $donasi->metode_pembayaran,
