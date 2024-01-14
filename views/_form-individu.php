@@ -168,7 +168,7 @@
                     <option>Cash</option> -->
                     <?php foreach($channel as $paymentMethod): ?>
                     <?php foreach($paymentMethod['items'] as $code => $name): ?>
-                    <option value="<?=$code?>" data-paymentchannel="<?=$paymentMethod['code']?>">(<?=$paymentMethod['name']?>) <?=strtoupper($name)?></option>
+                    <option value="<?=$name?>" data-paymentchannel="<?=$paymentMethod['code']?>">(<?=$paymentMethod['name']?>) <?=$code?></option>
                     <?php endforeach ?>
                     <?php endforeach ?>
                 </select>
