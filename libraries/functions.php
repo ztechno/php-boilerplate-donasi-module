@@ -27,8 +27,8 @@ a.n. SONI FAHRURI
 No.rek.: 3103197953" : ($data->metode_pembayaran != 'Cash' && $paymentResponse->Status == 200 ? "Metode : $data->metode_pembayaran
 
 Channel : $data->payment_channel
-No. Pembayaran : ".$data->paymentResponse->Data->PaymentNo."
-Nama Pembayaran : ".$data->paymentResponse->Data->PaymentName."
+No. Pembayaran : ".$paymentResponse->Data->PaymentNo."
+Nama Pembayaran : ".$paymentResponse->Data->PaymentName."
 " : "");
 
     $message = "Halo *[Nama]*,
